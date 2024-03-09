@@ -10,6 +10,8 @@ namespace myTiles {
     export const tile3 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile5 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile4 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -44,7 +46,7 @@ namespace myTiles {
 . . . . 2 . . . . . 2 . . . . . . 2 . . 2 . . 2 . . . . . . 
 . . . . 2 . . . . . 2 . . . 2 . . 2 . . 2 . . 2 . . . . . . 
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-`, [myTiles.transparency16,myTiles.tile1,sprites.builtin.forestTiles24,sprites.swamp.swampTile0,myTiles.tile3,sprites.dungeon.stairNorth,myTiles.tile5], TileScale.Sixteen);
+`, [myTiles.transparency16,myTiles.tile1,sprites.builtin.forestTiles24,sprites.swamp.swampTile0,myTiles.tile3,sprites.dungeon.stairNorth,myTiles.tile5,myTiles.tile4], TileScale.Sixteen);
         }
         return null;
     })
@@ -60,6 +62,8 @@ namespace myTiles {
             case "tile3":return tile3;
             case "myTile3":
             case "tile5":return tile5;
+            case "portail":
+            case "tile4":return tile4;
         }
         return null;
     })

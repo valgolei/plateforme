@@ -28,6 +28,12 @@
         "tilemapTile": true,
         "displayName": "myTile3"
     },
+    "tile4": {
+        "data": "hwQQABAAAAD//////////4+IiIiIiIj4jwkAAJAAAPiPAAAAAAAA+I8ACJCAAAn4jwAAAAAAAPiPAAkAAAAA+I8AAIAACQj4jwAAAJAAAPiPAAgAAAAA+I8JAAgAAAD4j4AAAAmAAPiPAAAAAACQ+I8AkAAAAAD4j4iIiIiIiPj//////////w==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "portail"
+    },
     "niveau1": {
         "id": "niveau1",
         "mimeType": "application/mkcd-tilemap",
@@ -48,7 +54,8 @@
             "sprites.swamp.swampTile0",
             "myTiles.tile3",
             "sprites.dungeon.stairNorth",
-            "myTiles.tile5"
+            "myTiles.tile5",
+            "myTiles.tile4"
         ],
         "displayName": "niveau2"
     },
