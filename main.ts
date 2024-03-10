@@ -1,10 +1,25 @@
 namespace SpriteKind {
     export const coin = SpriteKind.create()
+    export const piques = SpriteKind.create()
+}
+function appel_destruction_enemies () {
+    for (let enemie_normal2 of sprites.allOfKind(SpriteKind.Enemy)) {
+        sprites.destroy(enemie_normal2)
+    }
+    for (let coin of sprites.allOfKind(SpriteKind.coin)) {
+        sprites.destroy(coin)
+    }
+    for (let spike of sprites.allOfKind(SpriteKind.piques)) {
+        sprites.destroy(spike)
+    }
 }
 info.onScore(10, function () {
     music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.InBackground)
     info.setScore(0)
     info.changeLifeBy(1)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.piques, function (sprite, otherSprite) {
+    game.gameOver(false)
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (héros.isHittingTile(CollisionDirection.Bottom)) {
@@ -25,16 +40,16 @@ function création_enemie () {
             . . f f f 5 f f f f 5 f f f . . 
             . f f f f f f f f f f f f f f . 
             . f f f f f f f f f f f f f f . 
-            8 5 5 5 5 5 5 5 5 5 5 5 5 5 5 8 
+            . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
             . 8 f f f f f f f f f f f f 8 . 
             . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
-            8 f f f f f f f f f f f f f f 8 
+            . f f f f f f f f f f f f f f . 
             . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
-            8 f f f f f f f f f f f f f f 8 
+            . f f f f f f f f f f f f f f . 
             . 8 5 5 5 5 5 5 5 5 5 5 5 5 8 . 
-            8 f f f f f f f f f f f f f f 8 
+            . f f f f f f f f f f f f f f . 
             . 5 5 5 5 5 5 5 5 5 5 5 5 5 5 . 
-            f 8 f f f f f f f f f f f f 8 f 
+            . 8 f f f f f f f f f f f f 8 . 
             `, SpriteKind.Enemy)
         tiles.placeOnTile(enemie_normal, valeur)
         tiles.setTileAt(valeur, assets.tile`transparency16`)
@@ -66,7 +81,87 @@ function création_enemie () {
             `, SpriteKind.coin)
         tiles.placeOnTile(coin, valeur)
         tiles.setTileAt(valeur, assets.tile`transparency16`)
+        animation.runImageAnimation(
+        coin,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . 5 5 5 5 5 5 . . . . . 
+            . . . . 5 5 5 . . . 5 5 . . . . 
+            . . . . 5 5 . 5 5 5 5 5 . . . . 
+            . . . 5 5 5 . 5 5 5 5 5 5 . . . 
+            . . . 5 5 5 . 5 5 5 5 5 5 . . . 
+            . . . . 5 5 . 5 5 5 5 5 . . . . 
+            . . . . 5 5 5 . . . 5 5 . . . . 
+            . . . . . 5 5 5 5 5 5 . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `],
+        300,
+        true
+        )
     }
+    for (let valeur of tiles.getTilesByType(assets.tile`myTile1`)) {
+        spike = sprites.create(img`
+            . f . . . f . . . f . . . f . . 
+            f f f . f f f . f f f . f f f . 
+            . f . . . f . . . f . . . f . . 
+            . f . . . f . . . f . . . f . . 
+            . f . . . f . . . f . . . f . . 
+            . f . . . f . . . f . . . f . . 
+            . f . . . f . . . f . . . f . . 
+            . f . . . f . . . f . . . f . . 
+            . f . . . f . . . f . . . f . . 
+            . f . . . f . . . f . . . f . . 
+            . f . . . f . . . f . . . f . . 
+            . f . . . f . . . f . . . f . . 
+            . f . . . f . . . f . . . f . . 
+            f f f f f f f f f f f f f f f f 
+            d d d d d d d d d d d d d d d d 
+            f f f f f f f f f f f f f f f f 
+            `, SpriteKind.piques)
+        tiles.placeOnTile(spike, valeur)
+        tiles.setTileAt(valeur, assets.tile`transparency16`)
+    }
+}
+function niveau_suivant () {
+    appel_destruction_enemies()
+    if (progression == 0) {
+        scene.setBackgroundColor(9)
+        tiles.setCurrentTilemap(tilemap`niveau0`)
+        tiles.placeOnTile(héros, tiles.getTileLocation(0, 8))
+    }
+    if (progression == 1) {
+        scene.setBackgroundColor(6)
+        tiles.setCurrentTilemap(tilemap`niveau1`)
+        tiles.placeOnTile(héros, tiles.getTileLocation(1, 13))
+    }
+    if (progression == 2) {
+        game.gameOver(true)
+    }
+    création_enemie()
+    pause(500)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     if (sprite.y < otherSprite.top) {
@@ -83,8 +178,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
         animation.runImageAnimation(
         héros,
         [img`
-            . . . . . . f f f f . . . . . . 
-            . . . . f f f 2 2 f f f . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . f f f f f f . . . . . 
             . . . f f f 2 2 2 2 f f f . . . 
             . . f f f 2 2 2 2 2 2 f f f . . 
             . . f f 2 2 2 2 2 2 2 2 2 f . . 
@@ -100,8 +195,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
             . . . . . f f f f f f . . . . . 
             . . . . . f f . . f f . . . . . 
             `,img`
-            . . . . . . f f f f . . . . . . 
-            . . . . f f f 2 2 f f f . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . f f f f f f . . . . . 
             . . . f f f 2 2 2 2 f f f . . . 
             . . f f f e e e e e e f f f . . 
             . . f f e 2 2 2 2 2 2 e e f . . 
@@ -117,8 +212,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
             . . . . . f f f f f f . . . . . 
             . . . . . f f . . f f . . . . . 
             `,img`
-            . . . . . . f f f f . . . . . . 
-            . . . . f f f 2 2 f f f . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . f f f f f f . . . . . 
             . . . f f f 2 2 2 2 f f f . . . 
             . . f f f 2 2 2 2 2 2 f f f . . 
             . . f f 2 2 2 2 2 2 2 2 2 f . . 
@@ -134,8 +229,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
             . . . . . f f f f f f . . . . . 
             . . . . . f f . . f f . . . . . 
             `,img`
-            . . . . . . f f f f . . . . . . 
-            . . . . f f f 2 2 f f f . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . f f f f f f . . . . . 
             . . . f f f 2 2 2 2 f f f . . . 
             . . f f f e e e e e e f f f . . 
             . . f f e 2 2 2 2 2 2 e e f . . 
@@ -151,8 +246,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
             . . . . . f f f f f f . . . . . 
             . . . . . f f . . f f . . . . . 
             `,img`
-            . . . . . . f f f f . . . . . . 
-            . . . . f f f 2 2 f f f . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . f f f f f f . . . . . 
             . . . f f f 2 2 2 2 f f f . . . 
             . . f f f 2 2 2 2 2 2 f f f . . 
             . . f f 2 2 2 2 2 2 2 2 2 f . . 
@@ -168,8 +263,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
             . . . . . f f f f f f . . . . . 
             . . . . . f f . . f f . . . . . 
             `,img`
-            . . . . . . f f f f . . . . . . 
-            . . . . f f f 2 2 f f f . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . f f f f f f . . . . . 
             . . . f f f 2 2 2 2 f f f . . . 
             . . f f f e e e e e e f f f . . 
             . . f f e 2 2 2 2 2 2 e e f . . 
@@ -185,8 +280,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
             . . . . . f f f f f f . . . . . 
             . . . . . f f . . f f . . . . . 
             `,img`
-            . . . . . . f f f f . . . . . . 
-            . . . . f f f 2 2 f f f . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . f f f f f f . . . . . 
             . . . f f f 2 2 2 2 f f f . . . 
             . . f f f 2 2 2 2 2 2 f f f . . 
             . . f f 2 2 2 2 2 2 2 2 2 f . . 
@@ -202,8 +297,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
             . . . . . f f f f f f . . . . . 
             . . . . . f f . . f f . . . . . 
             `,img`
-            . . . . . . f f f f . . . . . . 
-            . . . . f f f 2 2 f f f . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . f f f f f f . . . . . 
             . . . f f f 2 2 2 2 f f f . . . 
             . . f f f e e e e e e f f f . . 
             . . f f e 2 2 2 2 2 2 e e f . . 
@@ -225,13 +320,15 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
         pause(800)
     }
 })
+let spike: Sprite = null
 let coin: Sprite = null
 let enemie_normal: Sprite = null
 let héros: Sprite = null
-scene.setBackgroundColor(9)
+let progression = 0
+progression = 0
 héros = sprites.create(img`
-    . . . . . . f f f f . . . . . . 
-    . . . . f f f 2 2 f f f . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . f f f f f f . . . . . 
     . . . f f f 2 2 2 2 f f f . . . 
     . . f f f e e e e e e f f f . . 
     . . f f e 2 2 2 2 2 2 e e f . . 
@@ -247,13 +344,11 @@ héros = sprites.create(img`
     . . . . . f f f f f f . . . . . 
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
-tiles.setCurrentTilemap(tilemap`niveau2`)
-tiles.placeOnTile(héros, tiles.getTileLocation(0, 8))
-scene.cameraFollowSprite(héros)
 controller.moveSprite(héros, 100, 0)
 héros.ay = 500
 info.setLife(3)
-création_enemie()
+scene.cameraFollowSprite(héros)
+niveau_suivant()
 game.onUpdate(function () {
     for (let enemie_normal2 of sprites.allOfKind(SpriteKind.Enemy)) {
         if (enemie_normal2.isHittingTile(CollisionDirection.Left)) {
@@ -262,13 +357,14 @@ game.onUpdate(function () {
         if (enemie_normal2.isHittingTile(CollisionDirection.Right)) {
             enemie_normal2.vx = randint(-30, -50)
         }
+        if (enemie_normal2.vx == 0) {
+            enemie_normal2.vx = randint(-30, -50)
+        }
     }
 })
 forever(function () {
-    if (héros.tileKindAt(TileDirection.Center, assets.tile`myTile1`)) {
-        game.gameOver(false)
-    }
     if (héros.tileKindAt(TileDirection.Center, sprites.dungeon.stairNorth)) {
-        game.gameOver(true)
+        progression += 1
+        niveau_suivant()
     }
 })
