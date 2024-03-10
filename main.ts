@@ -149,15 +149,20 @@ function niveau_suivant () {
     appel_destruction_enemies()
     if (progression == 0) {
         scene.setBackgroundColor(9)
-        tiles.setCurrentTilemap(tilemap`niveau0`)
+        tiles.setCurrentTilemap(tilemap`monde1-1`)
         tiles.placeOnTile(héros, tiles.getTileLocation(0, 8))
     }
     if (progression == 1) {
-        scene.setBackgroundColor(6)
-        tiles.setCurrentTilemap(tilemap`niveau1`)
-        tiles.placeOnTile(héros, tiles.getTileLocation(1, 13))
+        scene.setBackgroundColor(9)
+        tiles.setCurrentTilemap(tilemap`monde1-2`)
+        tiles.placeOnTile(héros, tiles.getTileLocation(0, 8))
     }
     if (progression == 2) {
+        scene.setBackgroundColor(6)
+        tiles.setCurrentTilemap(tilemap`monde2-1`)
+        tiles.placeOnTile(héros, tiles.getTileLocation(1, 13))
+    }
+    if (progression == 3) {
         game.gameOver(true)
     }
     création_enemie()
@@ -328,7 +333,7 @@ let progression = 0
 progression = 0
 héros = sprites.create(img`
     . . . . . . . . . . . . . . . . 
-    . . . . . f f f f f f . . . . . 
+    . . . . f f f f f f f f . . . . 
     . . . f f f 2 2 2 2 f f f . . . 
     . . f f f e e e e e e f f f . . 
     . . f f e 2 2 2 2 2 2 e e f . . 
