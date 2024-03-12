@@ -144,6 +144,34 @@ function création_enemie () {
         tiles.placeOnTile(spike, valeur)
         tiles.setTileAt(valeur, assets.tile`transparency16`)
     }
+    for (let valeur of tiles.getTilesByType(assets.tile`myTile5`)) {
+        énemie_casqué = sprites.create(img`
+            . . . f . . f . . f . . f . . . 
+            . . . f b b f b b f b b f . . . 
+            . . b b b b b b b b b b b b . . 
+            b b b b b 2 b b b b 2 b b b b b 
+            b b b b b b b b b b b b b b b b 
+            . f f f f f f f f f f f f f f . 
+            . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+            f f f f f f f f f f f f f f f f 
+            . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+            . f f f f f f f f f f f f f f . 
+            . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+            f f f f f f f f f f f f f f f f 
+            . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+            . f f f f f f f f f f f f f f . 
+            . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+            f f f f f f f f f f f f f f f f 
+            `, SpriteKind.Enemy)
+        tiles.placeOnTile(énemie_casqué, valeur)
+        tiles.setTileAt(valeur, assets.tile`transparency16`)
+        énemie_casqué.ay = 500
+        if (randint(0, 1) == 1) {
+            énemie_casqué.vx = -60
+        } else {
+            énemie_casqué.vx = 60
+        }
+    }
 }
 function niveau_suivant () {
     appel_destruction_enemies()
@@ -325,6 +353,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
         pause(800)
     }
 })
+let énemie_casqué: Sprite = null
 let spike: Sprite = null
 let coin: Sprite = null
 let enemie_normal: Sprite = null
@@ -345,9 +374,9 @@ héros = sprites.create(img`
     . . . f e e 4 4 4 4 e e f . . . 
     . . e 4 f 2 2 2 2 2 2 f 4 e . . 
     . . 4 d f 2 2 2 2 2 2 f d 4 . . 
-    . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
-    . . . . . f f f f f f . . . . . 
+    . . 4 4 f f f f f f f f 4 4 . . 
     . . . . . f f . . f f . . . . . 
+    . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
 controller.moveSprite(héros, 100, 0)
 héros.ay = 500
