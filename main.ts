@@ -1,6 +1,7 @@
 namespace SpriteKind {
     export const coin = SpriteKind.create()
     export const piques = SpriteKind.create()
+    export const énemie_invincible = SpriteKind.create()
 }
 function appel_destruction_enemies () {
     for (let enemie_normal2 of sprites.allOfKind(SpriteKind.Enemy)) {
@@ -11,6 +12,9 @@ function appel_destruction_enemies () {
     }
     for (let spike of sprites.allOfKind(SpriteKind.piques)) {
         sprites.destroy(spike)
+    }
+    for (let énemie_casqué2 of sprites.allOfKind(SpriteKind.énemie_invincible)) {
+        sprites.destroy(énemie_casqué2)
     }
 }
 info.onScore(10, function () {
@@ -27,6 +31,16 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.piques, function (sprite, otherS
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (héros.isHittingTile(CollisionDirection.Bottom)) {
         héros.vy = -200
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.énemie_invincible, function (sprite, otherSprite) {
+    if (invincibilité == 0) {
+        if (info.life() == 1) {
+            sprites.destroy(héros)
+        }
+        music.play(music.melodyPlayable(music.buzzer), music.PlaybackMode.InBackground)
+        info.changeLifeBy(-1)
+        touché()
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.coin, function (sprite, otherSprite) {
@@ -152,20 +166,20 @@ function création_enemie () {
             . . . f . . f . . f . . f . . . 
             . . . f b b f b b f b b f . . . 
             . . b b b b b b b b b b b b . . 
-            b b b b b 2 b b b b 2 b b b b b 
-            b b b b b b b b b b b b b b b b 
+            . b b b b 2 b b b b 2 b b b b . 
+            . b b b b b b b b b b b b b b . 
+            . . f f f f f f f f f f f f . . 
+            . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
             . f f f f f f f f f f f f f f . 
-            . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-            f f f f f f f f f f f f f f f f 
-            . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+            . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
+            . . f f f f f f f f f f f f . . 
+            . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
             . f f f f f f f f f f f f f f . 
-            . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-            f f f f f f f f f f f f f f f f 
-            . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+            . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
+            . . f f f f f f f f f f f f . . 
+            . . 2 2 2 2 2 2 2 2 2 2 2 2 . . 
             . f f f f f f f f f f f f f f . 
-            . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-            f f f f f f f f f f f f f f f f 
-            `, SpriteKind.Enemy)
+            `, SpriteKind.énemie_invincible)
         tiles.placeOnTile(énemie_casqué, valeur)
         tiles.setTileAt(valeur, assets.tile`transparency16`)
         énemie_casqué.ay = 500
@@ -406,10 +420,24 @@ game.onUpdate(function () {
             enemie_normal2.vx = randint(-30, -50)
         }
     }
+    for (let énemie_casqué2 of sprites.allOfKind(SpriteKind.énemie_invincible)) {
+        if (énemie_casqué2.isHittingTile(CollisionDirection.Left)) {
+            énemie_casqué2.vx = randint(50, 70)
+        }
+        if (énemie_casqué2.isHittingTile(CollisionDirection.Right)) {
+            énemie_casqué2.vx = randint(-50, -70)
+        }
+        if (énemie_casqué2.vx == 0) {
+            énemie_casqué2.vx = randint(-50, -70)
+        }
+    }
 })
 forever(function () {
     if (héros.tileKindAt(TileDirection.Center, sprites.dungeon.stairNorth)) {
         progression += 1
         niveau_suivant()
+    }
+    if (héros.tileKindAt(TileDirection.Center, assets.tile`myTile6`)) {
+        héros.vy = -300
     }
 })
