@@ -32,8 +32,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.piques, function (sprite, otherS
     }
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (héros.isHittingTile(CollisionDirection.Bottom)) {
-        héros.vy = -200
+    if (progression != 6) {
+        if (héros.isHittingTile(CollisionDirection.Bottom)) {
+            héros.vy = -200
+        }
+    } else {
+        héros.vy = -100
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.énemie_invincible, function (sprite, otherSprite) {
@@ -607,11 +611,19 @@ function niveau_suivant () {
             ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff......f.
             `, SpriteKind.mur)
         tiles.placeOnTile(grand_mur, tiles.getTileLocation(-10, 3))
-        tiles.placeOnTile(héros, tiles.getTileLocation(1, 8))
+        tiles.placeOnTile(héros, tiles.getTileLocation(0, 8))
         grand_mur.vx = 30
+        création_enemie()
         game.showLongText("Attention, un mur armé de piques avance en même temps que vous dans ce niveau", DialogLayout.Bottom)
     }
     if (progression == 6) {
+        scene.setBackgroundColor(8)
+        tiles.setCurrentTilemap(tilemap`monde3-3`)
+        tiles.placeOnTile(héros, tiles.getTileLocation(1, 38))
+        héros.ay = 200
+        game.showLongText("Vous allez maintenant évoluer dans un monde aquatique dans lequel vous pouvez nager", DialogLayout.Bottom)
+    }
+    if (progression == 7) {
         game.gameOver(true)
     }
     création_enemie()
