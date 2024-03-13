@@ -2,6 +2,7 @@ namespace SpriteKind {
     export const coin = SpriteKind.create()
     export const piques = SpriteKind.create()
     export const énemie_invincible = SpriteKind.create()
+    export const StatusBar = SpriteKind.create()
 }
 function appel_destruction_enemies () {
     for (let enemie_normal2 of sprites.allOfKind(SpriteKind.Enemy)) {
@@ -25,6 +26,7 @@ info.onScore(10, function () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.piques, function (sprite, otherSprite) {
     if (invincibilité == 0) {
         info.changeLifeBy(-1)
+        music.play(music.melodyPlayable(music.buzzer), music.PlaybackMode.InBackground)
         touché()
     }
 })
@@ -350,11 +352,21 @@ function niveau_suivant () {
         tiles.placeOnTile(héros, tiles.getTileLocation(0, 8))
     }
     if (progression == 2) {
+        scene.setBackgroundColor(9)
+        tiles.setCurrentTilemap(tilemap`monde1-3`)
+        tiles.placeOnTile(héros, tiles.getTileLocation(0, 8))
+    }
+    if (progression == 3) {
         scene.setBackgroundColor(6)
         tiles.setCurrentTilemap(tilemap`monde2-1`)
         tiles.placeOnTile(héros, tiles.getTileLocation(1, 13))
     }
-    if (progression == 3) {
+    if (progression == 4) {
+        scene.setBackgroundColor(6)
+        tiles.setCurrentTilemap(tilemap`monde2-2`)
+        tiles.placeOnTile(héros, tiles.getTileLocation(1, 48))
+    }
+    if (progression == 5) {
         game.gameOver(true)
     }
     création_enemie()
@@ -384,7 +396,7 @@ let enemie_normal: Sprite = null
 let invincibilité = 0
 let héros: Sprite = null
 let progression = 0
-progression = 0
+progression = 4
 héros = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . f f f f f f f f . . . . 
@@ -433,11 +445,14 @@ game.onUpdate(function () {
     }
 })
 forever(function () {
-    if (héros.tileKindAt(TileDirection.Center, sprites.dungeon.stairNorth)) {
+    if (héros.tileKindAt(TileDirection.Center, sprites.dungeon.stairNorth) || héros.tileKindAt(TileDirection.Center, sprites.dungeon.stairLarge)) {
         progression += 1
         niveau_suivant()
     }
     if (héros.tileKindAt(TileDirection.Center, assets.tile`myTile6`)) {
         héros.vy = -300
+    }
+    if (héros.tileKindAt(TileDirection.Center, sprites.dungeon.hazardLava1)) {
+        game.gameOver(false)
     }
 })
