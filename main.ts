@@ -172,6 +172,28 @@ function création_enemie () {
         tiles.placeOnTile(spike, valeur)
         tiles.setTileAt(valeur, assets.tile`transparency16`)
     }
+    for (let valeur of tiles.getTilesByType(assets.tile`myTile7`)) {
+        spike = sprites.create(img`
+            f f f f f f f f f f f f f f f f 
+            d d d d d d d d d d d d d d d d 
+            f f f f f f f f f f f f f f f f 
+            . . f . . . f . . . f . . . f . 
+            . . f . . . f . . . f . . . f . 
+            . . f . . . f . . . f . . . f . 
+            . . f . . . f . . . f . . . f . 
+            . . f . . . f . . . f . . . f . 
+            . . f . . . f . . . f . . . f . 
+            . . f . . . f . . . f . . . f . 
+            . . f . . . f . . . f . . . f . 
+            . . f . . . f . . . f . . . f . 
+            . . f . . . f . . . f . . . f . 
+            . . f . . . f . . . f . . . f . 
+            . f f f . f f f . f f f . f f f 
+            . . f . . . f . . . f . . . f . 
+            `, SpriteKind.piques)
+        tiles.placeOnTile(spike, valeur)
+        tiles.setTileAt(valeur, assets.tile`transparency16`)
+    }
     for (let valeur of tiles.getTilesByType(assets.tile`myTile5`)) {
         énemie_casqué = sprites.create(img`
             . . . f . . f . . f . . f . . . 
@@ -618,12 +640,19 @@ function niveau_suivant () {
     }
     if (progression == 6) {
         scene.setBackgroundColor(8)
-        tiles.setCurrentTilemap(tilemap`monde3-3`)
-        tiles.placeOnTile(héros, tiles.getTileLocation(1, 38))
+        tiles.setCurrentTilemap(tilemap`monde3-1`)
+        tiles.placeOnTile(héros, tiles.getTileLocation(1, 10))
         héros.ay = 200
+        création_enemie()
         game.showLongText("Vous allez maintenant évoluer dans un monde aquatique dans lequel vous pouvez nager", DialogLayout.Bottom)
     }
     if (progression == 7) {
+        scene.setBackgroundColor(8)
+        tiles.setCurrentTilemap(tilemap`monde3-3`)
+        tiles.placeOnTile(héros, tiles.getTileLocation(1, 38))
+        héros.ay = 200
+    }
+    if (progression == 8) {
         game.gameOver(true)
     }
     création_enemie()
@@ -654,7 +683,7 @@ let enemie_normal: Sprite = null
 let invincibilité = 0
 let héros: Sprite = null
 let progression = 0
-progression = 0
+progression = 6
 héros = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . f f f f f f f f . . . . 
@@ -714,6 +743,7 @@ forever(function () {
         héros.vy = -300
     }
     if (héros.tileKindAt(TileDirection.Center, sprites.dungeon.hazardLava1)) {
-        game.gameOver(false)
+        info.changeLifeBy(-1)
+        pause(100)
     }
 })
