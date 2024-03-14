@@ -688,7 +688,7 @@ let enemie_normal: Sprite = null
 let invincibilité = 0
 let héros: Sprite = null
 let progression = 0
-progression = 6
+progression = 0
 héros = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . f f f f f f f f . . . . 
