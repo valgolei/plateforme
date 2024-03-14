@@ -32,12 +32,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.piques, function (sprite, otherS
     }
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (progression != 6) {
+    if (progression > 5 && progression < 9) {
+        héros.vy = -100
+    } else {
         if (héros.isHittingTile(CollisionDirection.Bottom)) {
             héros.vy = -200
         }
-    } else {
-        héros.vy = -100
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.énemie_invincible, function (sprite, otherSprite) {
@@ -641,18 +641,23 @@ function niveau_suivant () {
     if (progression == 6) {
         scene.setBackgroundColor(8)
         tiles.setCurrentTilemap(tilemap`monde3-1`)
-        tiles.placeOnTile(héros, tiles.getTileLocation(1, 10))
-        héros.ay = 200
+        tiles.placeOnTile(héros, tiles.getTileLocation(1, 16))
         création_enemie()
+        héros.ay = 200
         game.showLongText("Vous allez maintenant évoluer dans un monde aquatique dans lequel vous pouvez nager", DialogLayout.Bottom)
     }
     if (progression == 7) {
+        scene.setBackgroundColor(8)
+        tiles.setCurrentTilemap(tilemap`monde3-2`)
+        tiles.placeOnTile(héros, tiles.getTileLocation(1, 10))
+    }
+    if (progression == 8) {
         scene.setBackgroundColor(8)
         tiles.setCurrentTilemap(tilemap`monde3-3`)
         tiles.placeOnTile(héros, tiles.getTileLocation(1, 38))
         héros.ay = 200
     }
-    if (progression == 8) {
+    if (progression == 9) {
         game.gameOver(true)
     }
     création_enemie()
