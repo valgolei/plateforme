@@ -6,20 +6,6 @@ namespace SpriteKind {
     export const shuriken = SpriteKind.create()
     export const Boss = SpriteKind.create()
 }
-function appel_destruction_enemies () {
-    for (let enemie_normal2 of sprites.allOfKind(SpriteKind.Enemy)) {
-        sprites.destroy(enemie_normal2)
-    }
-    for (let coin of sprites.allOfKind(SpriteKind.coin)) {
-        sprites.destroy(coin)
-    }
-    for (let spike of sprites.allOfKind(SpriteKind.piques)) {
-        sprites.destroy(spike)
-    }
-    for (let énemie_casqué2 of sprites.allOfKind(SpriteKind.énemie_invincible)) {
-        sprites.destroy(énemie_casqué2)
-    }
-}
 info.onScore(10, function () {
     music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.InBackground)
     info.setScore(0)
@@ -242,8 +228,8 @@ function touché () {
         . . f f 2 2 2 2 2 2 2 2 2 f . . 
         . . f 2 2 f f f f f f 2 2 f . . 
         . . f f f f 2 2 2 2 f f f f . . 
-        . f f 2 f 2 f 2 2 f 2 f 2 f f . 
-        . f 2 2 2 2 f 2 2 f 2 2 2 2 f . 
+        . . f 2 f 2 f 2 2 f 2 f 2 f . . 
+        . . f 2 2 2 f 2 2 f 2 2 2 f . . 
         . . f 2 2 2 2 2 2 2 2 2 2 f . . 
         . . . f 2 2 2 2 2 2 2 2 f . . . 
         . . 2 2 f 2 2 2 2 2 2 f 2 2 . . 
@@ -259,8 +245,8 @@ function touché () {
         . . f f e 2 2 2 2 2 2 e e f . . 
         . . f e 2 f f f f f f 2 e f . . 
         . . f f f f e e e e f f f f . . 
-        . f f e f b f 4 4 f b f e f f . 
-        . f e e 4 1 f d d f 1 4 e e f . 
+        . . f e f b f 4 4 f b f e f . . 
+        . . f e 4 1 f d d f 1 4 e f . . 
         . . f e e d d d d d d e e f . . 
         . . . f e e 4 4 4 4 e e f . . . 
         . . e 4 f 2 2 2 2 2 2 f 4 e . . 
@@ -276,8 +262,8 @@ function touché () {
         . . f f 2 2 2 2 2 2 2 2 2 f . . 
         . . f 2 2 f f f f f f 2 2 f . . 
         . . f f f f 2 2 2 2 f f f f . . 
-        . f f 2 f 2 f 2 2 f 2 f 2 f f . 
-        . f 2 2 2 2 f 2 2 f 2 2 2 2 f . 
+        . . f 2 f 2 f 2 2 f 2 f 2 f . . 
+        . . f 2 2 2 f 2 2 f 2 2 2 f . . 
         . . f 2 2 2 2 2 2 2 2 2 2 f . . 
         . . . f 2 2 2 2 2 2 2 2 f . . . 
         . . 2 2 f 2 2 2 2 2 2 f 2 2 . . 
@@ -293,8 +279,8 @@ function touché () {
         . . f f e 2 2 2 2 2 2 e e f . . 
         . . f e 2 f f f f f f 2 e f . . 
         . . f f f f e e e e f f f f . . 
-        . f f e f b f 4 4 f b f e f f . 
-        . f e e 4 1 f d d f 1 4 e e f . 
+        . . f e f b f 4 4 f b f e f . . 
+        . . f e 4 1 f d d f 1 4 e f . . 
         . . f e e d d d d d d e e f . . 
         . . . f e e 4 4 4 4 e e f . . . 
         . . e 4 f 2 2 2 2 2 2 f 4 e . . 
@@ -310,8 +296,8 @@ function touché () {
         . . f f 2 2 2 2 2 2 2 2 2 f . . 
         . . f 2 2 f f f f f f 2 2 f . . 
         . . f f f f 2 2 2 2 f f f f . . 
-        . f f 2 f 2 f 2 2 f 2 f 2 f f . 
-        . f 2 2 2 2 f 2 2 f 2 2 2 2 f . 
+        . . f 2 f 2 f 2 2 f 2 f 2 f . . 
+        . . f 2 2 2 f 2 2 f 2 2 2 f . . 
         . . f 2 2 2 2 2 2 2 2 2 2 f . . 
         . . . f 2 2 2 2 2 2 2 2 f . . . 
         . . 2 2 f 2 2 2 2 2 2 f 2 2 . . 
@@ -327,8 +313,8 @@ function touché () {
         . . f f e 2 2 2 2 2 2 e e f . . 
         . . f e 2 f f f f f f 2 e f . . 
         . . f f f f e e e e f f f f . . 
-        . f f e f b f 4 4 f b f e f f . 
-        . f e e 4 1 f d d f 1 4 e e f . 
+        . . f e f b f 4 4 f b f e f . . 
+        . . f e 4 1 f d d f 1 4 e f . . 
         . . f e e d d d d d d e e f . . 
         . . . f e e 4 4 4 4 e e f . . . 
         . . e 4 f 2 2 2 2 2 2 f 4 e . . 
@@ -344,8 +330,8 @@ function touché () {
         . . f f 2 2 2 2 2 2 2 2 2 f . . 
         . . f 2 2 f f f f f f 2 2 f . . 
         . . f f f f 2 2 2 2 f f f f . . 
-        . f f 2 f 2 f 2 2 f 2 f 2 f f . 
-        . f 2 2 2 2 f 2 2 f 2 2 2 2 f . 
+        . . f 2 f 2 f 2 2 f 2 f 2 f . . 
+        . . f 2 2 2 f 2 2 f 2 2 2 f . . 
         . . f 2 2 2 2 2 2 2 2 2 2 f . . 
         . . . f 2 2 2 2 2 2 2 2 f . . . 
         . . 2 2 f 2 2 2 2 2 2 f 2 2 . . 
@@ -361,8 +347,8 @@ function touché () {
         . . f f e 2 2 2 2 2 2 e e f . . 
         . . f e 2 f f f f f f 2 e f . . 
         . . f f f f e e e e f f f f . . 
-        . f f e f b f 4 4 f b f e f f . 
-        . f e e 4 1 f d d f 1 4 e e f . 
+        . . f e f b f 4 4 f b f e f . . 
+        . . f e 4 1 f d d f 1 4 e f . . 
         . . f e e d d d d d d e e f . . 
         . . . f e e 4 4 4 4 e e f . . . 
         . . e 4 f 2 2 2 2 2 2 f 4 e . . 
@@ -377,6 +363,11 @@ function touché () {
     pause(800)
     invincibilité = 0
 }
+info.onLifeZero(function () {
+    sprites.destroy(héros)
+    music.play(music.melodyPlayable(music.sonar), music.PlaybackMode.InBackground)
+    game.gameOver(false)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.mur, function (sprite, otherSprite) {
     if (invincibilité == 0) {
         if (info.life() == 1) {
@@ -388,7 +379,59 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.mur, function (sprite, otherSpri
     }
 })
 function niveau_suivant () {
-    appel_destruction_enemies()
+    sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
+    sprites.destroyAllSpritesOfKind(SpriteKind.coin)
+    sprites.destroyAllSpritesOfKind(SpriteKind.piques)
+    sprites.destroyAllSpritesOfKind(SpriteKind.énemie_invincible)
+    tiles.setCurrentTilemap(tilemap`niveau27`)
+    scene.setBackgroundColor(15)
+    animation.runImageAnimation(
+    héros,
+    [img`
+        f f f f f f f f f f f f f f f f 
+        f . . . . . . . . . . . . . . f 
+        f . . . . . . . . . . . . . . f 
+        f . . . . . . . . . . . . . . f 
+        f . . . . . . . . . . . . . . f 
+        f . . . . . . . . . . . . . . f 
+        f . . . . . . . . . . . . . . f 
+        f . . . . . . . . . . . . . . f 
+        f . . . . . . . . . . . . . . f 
+        f . . . . . . . . . . . . . . f 
+        f . . . . . . . . . . . . . . f 
+        f . . . . . . . . . . . . . . f 
+        f . . . . . . . . . . . . . . f 
+        f . . . . . . . . . . . . . . f 
+        f . . . . . . . . . . . . . . f 
+        f f f f f f f f f f f f f f f f 
+        `],
+    500,
+    false
+    )
+    pause(500)
+    animation.runImageAnimation(
+    héros,
+    [img`
+        . . . . . . . . . . . . . . . . 
+        . . . . f f f f f f f f . . . . 
+        . . . f f f 2 2 2 2 f f f . . . 
+        . . f f f e e e e e e f f f . . 
+        . . f f e 2 2 2 2 2 2 e e f . . 
+        . . f e 2 f f f f f f 2 e f . . 
+        . . f f f f e e e e f f f f . . 
+        . . f e f b f 4 4 f b f e f . . 
+        . . f e 4 1 f d d f 1 4 e f . . 
+        . . f e e d d d d d d e e f . . 
+        . . . f e e 4 4 4 4 e e f . . . 
+        . . e 4 f 2 2 2 2 2 2 f 4 e . . 
+        . . 4 d f 2 2 2 2 2 2 f d 4 . . 
+        . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . . f f . . f f . . . . . 
+        `],
+    500,
+    false
+    )
     if (progression == 0) {
         scene.setBackgroundColor(9)
         tiles.setCurrentTilemap(tilemap`monde1-1`)
@@ -809,7 +852,6 @@ function niveau_suivant () {
         game.gameOver(true)
     }
     création_enemie()
-    pause(500)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     if (sprite.y < otherSprite.top) {
@@ -873,8 +915,8 @@ héros = sprites.create(img`
     . . f f e 2 2 2 2 2 2 e e f . . 
     . . f e 2 f f f f f f 2 e f . . 
     . . f f f f e e e e f f f f . . 
-    . f f e f b f 4 4 f b f e f f . 
-    . f e e 4 1 f d d f 1 4 e e f . 
+    . . f e f b f 4 4 f b f e f . . 
+    . . f e 4 1 f d d f 1 4 e f . . 
     . . f e e d d d d d d e e f . . 
     . . . f e e 4 4 4 4 e e f . . . 
     . . e 4 f 2 2 2 2 2 2 f 4 e . . 
