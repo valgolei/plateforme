@@ -365,7 +365,7 @@ function touché () {
 }
 info.onLifeZero(function () {
     sprites.destroy(héros)
-    music.play(music.melodyPlayable(music.sonar), music.PlaybackMode.InBackground)
+    game.setGameOverPlayable(false, music.melodyPlayable(music.sonar), false)
     game.gameOver(false)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.mur, function (sprite, otherSprite) {
@@ -383,59 +383,60 @@ function niveau_suivant () {
     sprites.destroyAllSpritesOfKind(SpriteKind.coin)
     sprites.destroyAllSpritesOfKind(SpriteKind.piques)
     sprites.destroyAllSpritesOfKind(SpriteKind.énemie_invincible)
-    tiles.setCurrentTilemap(tilemap`niveau27`)
-    scene.setBackgroundColor(15)
-    animation.runImageAnimation(
-    héros,
-    [img`
-        f f f f f f f f f f f f f f f f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f . . . . . . . . . . . . . . f 
-        f f f f f f f f f f f f f f f f 
-        `],
-    500,
-    false
-    )
-    pause(500)
-    animation.runImageAnimation(
-    héros,
-    [img`
-        . . . . . . . . . . . . . . . . 
-        . . . . f f f f f f f f . . . . 
-        . . . f f f 2 2 2 2 f f f . . . 
-        . . f f f e e e e e e f f f . . 
-        . . f f e 2 2 2 2 2 2 e e f . . 
-        . . f e 2 f f f f f f 2 e f . . 
-        . . f f f f e e e e f f f f . . 
-        . . f e f b f 4 4 f b f e f . . 
-        . . f e 4 1 f d d f 1 4 e f . . 
-        . . f e e d d d d d d e e f . . 
-        . . . f e e 4 4 4 4 e e f . . . 
-        . . e 4 f 2 2 2 2 2 2 f 4 e . . 
-        . . 4 d f 2 2 2 2 2 2 f d 4 . . 
-        . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
-        . . . . . f f f f f f . . . . . 
-        . . . . . f f . . f f . . . . . 
-        `],
-    500,
-    false
-    )
     if (progression == 0) {
         scene.setBackgroundColor(9)
         tiles.setCurrentTilemap(tilemap`monde1-1`)
         tiles.placeOnTile(héros, tiles.getTileLocation(0, 8))
+    } else {
+        tiles.setCurrentTilemap(tilemap`niveau27`)
+        scene.setBackgroundColor(15)
+        animation.runImageAnimation(
+        héros,
+        [img`
+            f f f f f f f f f f f f f f f f 
+            f . . . . . . . . . . . . . . f 
+            f . . . . . . . . . . . . . . f 
+            f . . . . . . . . . . . . . . f 
+            f . . . . . . . . . . . . . . f 
+            f . . . . . . . . . . . . . . f 
+            f . . . . . . . . . . . . . . f 
+            f . . . . . . . . . . . . . . f 
+            f . . . . . . . . . . . . . . f 
+            f . . . . . . . . . . . . . . f 
+            f . . . . . . . . . . . . . . f 
+            f . . . . . . . . . . . . . . f 
+            f . . . . . . . . . . . . . . f 
+            f . . . . . . . . . . . . . . f 
+            f . . . . . . . . . . . . . . f 
+            f f f f f f f f f f f f f f f f 
+            `],
+        500,
+        false
+        )
+        pause(500)
+        animation.runImageAnimation(
+        héros,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . f f f f f f f f . . . . 
+            . . . f f f 2 2 2 2 f f f . . . 
+            . . f f f e e e e e e f f f . . 
+            . . f f e 2 2 2 2 2 2 e e f . . 
+            . . f e 2 f f f f f f 2 e f . . 
+            . . f f f f e e e e f f f f . . 
+            . . f e f b f 4 4 f b f e f . . 
+            . . f e 4 1 f d d f 1 4 e f . . 
+            . . f e e d d d d d d e e f . . 
+            . . . f e e 4 4 4 4 e e f . . . 
+            . . e 4 f 2 2 2 2 2 2 f 4 e . . 
+            . . 4 d f 2 2 2 2 2 2 f d 4 . . 
+            . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
+            . . . . . f f f f f f . . . . . 
+            . . . . . f f . . f f . . . . . 
+            `],
+        500,
+        false
+        )
     }
     if (progression == 1) {
         scene.setBackgroundColor(9)
@@ -712,6 +713,7 @@ function niveau_suivant () {
         tiles.setCurrentTilemap(tilemap`Boss`)
         tiles.placeOnTile(héros, tiles.getTileLocation(1, 18))
         héros.ay = 500
+        game.showLongText("vous arrivez au boss", DialogLayout.Bottom)
         Boss = sprites.create(img`
             ....................555555555555555555555555....................
             ....................555555555555555555555555....................
@@ -847,6 +849,9 @@ function niveau_suivant () {
         statusbar = statusbars.create(10, 4, StatusBarKind.Health)
         statusbar.setPosition(13, 15)
         statusbar.setColor(7, 15)
+        scene.cameraFollowSprite(Boss)
+        pause(1000)
+        scene.cameraFollowSprite(héros)
     }
     if (progression == 10) {
         game.gameOver(true)
