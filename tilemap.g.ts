@@ -32,6 +32,14 @@ namespace myTiles {
     export const tile13 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile15 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile16 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile17 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile18 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile19 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -754,19 +762,6 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency16], TileScale.Sixteen);
-            case "monde0":
-            case "niveau11":return tiles.createTilemap(hex`0a000a0000000000000000000004000000000000000000040000000000000000000400000000000000000004000000000000000000040000000000000000000400000000050000000004000000000000000000040100000002000000030404040404040404040404`, img`
-. . . . . . . . . 2 
-. . . . . . . . . 2 
-. . . . . . . . . 2 
-. . . . . . . . . 2 
-. . . . . . . . . 2 
-. . . . . . . . . 2 
-. . . . 2 . . . . 2 
-. . . . . . . . . 2 
-. . . . . . . . . 2 
-2 2 2 2 2 2 2 2 2 2 
-`, [myTiles.transparency16,sprites.dungeon.stairLadder,sprites.dungeon.stairSouth,sprites.dungeon.stairEast,sprites.castle.rock0,myTiles.tile14], TileScale.Sixteen);
             case "niveau41":
             case "niveau41":return tiles.createTilemap(hex`1000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`, img`
 . . . . . . . . . . . . . . . . 
@@ -837,8 +832,21 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency16], TileScale.Sixteen);
+            case "monde0":
+            case "niveau11":return tiles.createTilemap(hex`0a000a0004040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040405040604070404000000000000000004040000000000000000040400000400040004000404040404010402040304`, img`
+2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 
+2 . . . . . . . . 2 
+2 . . . . . . . . 2 
+2 . . 2 . 2 . 2 . 2 
+2 2 2 2 . 2 . 2 . 2 
+`, [myTiles.transparency16,sprites.dungeon.stairLadder,sprites.dungeon.stairSouth,sprites.dungeon.stairEast,myTiles.tile16,myTiles.tile17,myTiles.tile18,myTiles.tile19], TileScale.Sixteen);
             case "tuto2":
-            case "niveau13":return tiles.createTilemap(hex`10000a0002020202020202020202020202020202020101010101010101010101010101020200010000000100020001000002000202000200000002000000020000000102020100000001000000010000010002020201000000020000000200000200000202000001000000000100010100000002020000020001000002000002000000020200000000000000000000000002000202020202020202020202020202020202`, img`
+            case "niveau13":return tiles.createTilemap(hex`10000a0002020202020202020202020202020202020101010101010101010101010101020200010000000100020001000002000202000200000002000000020000000102020100000001000000010000010002020201000000020000000200000200000202000001000000000100010100000002020000020001000002000002000000020200000000000000000000000002030202020202020202020202020202020202`, img`
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
 2 . . . . . . . . . . . . . . 2 
 2 . . . . . . . 2 . . . . 2 . 2 
@@ -849,7 +857,26 @@ namespace myTiles {
 2 . . 2 . . . . 2 . . 2 . . . 2 
 2 . . . . . . . . . . . . 2 . 2 
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-`, [myTiles.transparency16,myTiles.tile6,myTiles.tile15], TileScale.Sixteen);
+`, [myTiles.transparency16,myTiles.tile6,myTiles.tile15,sprites.dungeon.stairNorth], TileScale.Sixteen);
+            case "niveau43":
+            case "niveau43":return tiles.createTilemap(hex`1000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, [myTiles.transparency16], TileScale.Sixteen);
         }
         return null;
     })
@@ -887,6 +914,14 @@ namespace myTiles {
             case "tile13":return tile13;
             case "myTile12":
             case "tile15":return tile15;
+            case "myTile13":
+            case "tile16":return tile16;
+            case "myTile14":
+            case "tile17":return tile17;
+            case "myTile15":
+            case "tile18":return tile18;
+            case "myTile16":
+            case "tile19":return tile19;
         }
         return null;
     })
