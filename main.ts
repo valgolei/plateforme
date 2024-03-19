@@ -864,6 +864,14 @@ function niveau_suivant () {
         game.showLongText("on commence tout de suite", DialogLayout.Bottom)
         game.showLongText("essayez de sauter de tuiles en tuiles pour atteindre l'escalier en bas à droite", DialogLayout.Bottom)
     }
+    if (progression == 12) {
+        scene.setBackgroundColor(13)
+        tiles.setCurrentTilemap(tilemap`tuto2`)
+        tiles.placeOnTile(héros, tiles.getTileLocation(1, 8))
+        pause(100)
+        game.showLongText("vous pouvez attraper les pièces", DialogLayout.Bottom)
+        game.showLongText("elles augmentent votre score et permettent de gagner une vie tous les dix", DialogLayout.Bottom)
+    }
     création_enemie()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
