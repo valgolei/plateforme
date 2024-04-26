@@ -1078,6 +1078,11 @@ forever(function () {
         progression = 11
         niveau_suivant()
     }
+    if (héros.tileKindAt(TileDirection.Center, sprites.dungeon.stairEast)) {
+        progression = 1
+        niveau_suivant()
+        info.startCountdown(180)
+    }
 })
 forever(function () {
     pauseUntil(() => progression == 10)
