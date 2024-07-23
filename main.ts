@@ -675,144 +675,63 @@ function niveau_suivant () {
         héros.ay = 200
     }
     if (progression == 10) {
-        scene.setBackgroundColor(2)
-        tiles.setCurrentTilemap(tilemap`Boss`)
-        tiles.placeOnTile(héros, tiles.getTileLocation(1, 18))
+        scene.setBackgroundColor(12)
+        tiles.setCurrentTilemap(tilemap`BossEvolution`)
+        tiles.placeOnTile(héros, tiles.getTileLocation(0, 18))
         héros.ay = 500
         music.stopAllSounds()
         game.showLongText("vous arrivez au boss", DialogLayout.Bottom)
         Boss = sprites.create(img`
-            ....................555555555555555555555555....................
-            ....................555555555555555555555555....................
-            ..............555555555555555555555555555555555555..............
-            ..............555555555555555555555555555555555555..............
-            ..............555555555555555555555555555555555555..............
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            5555555555555555555555555555555555555555555555555555555555555555
-            2222222222222222222222222222222222222222222222222222222222222222
-            2222222222222222222222222222222222222222222222222222222222222222
-            2222222222222222222222222222222222222222222222222222222222222222
-            2222222222222222222222222222222222222222222222222222222222222222
-            2222222222222222222222222222222222222222222222222222222222222222
-            4444444444444444444444444fffff7777fffff4444444444444444444444444
-            4444444444444444444444444fffff7777fffff4444444444444444444444444
-            4444444444444444444444444fffff7777fffff4444444444444444444444444
-            4444444444444444444444444fffff7777fffff4444444444444444444444444
-            4444444444444444444444444fffff7777fffff4444444444444444444444444
-            7777777777777777777744444777777777777774444477777777777777777777
-            7777777777777777777744444777777777777774444477777777777777777777
-            7777777777777777777744444777777777777774444477777777777777777777
-            7777777777777777777744444777777777777774444477777777777777777777
-            7777777777777777777777777777777777777774444477777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            77777777777777777777fffff77777777777777fffff77777777777777777777
-            77777777777777777777fffff77777777777777fffff77777777777777777777
-            77777777777777777777fffff77777777777777fffff77777777777777777777
-            77777777777777777777fffff77777777777777fffff77777777777777777777
-            77777777777777777777fffff77777777777777fffff77777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            7777777777777777777777777777777777777777777777777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            7777777777777777777777777777777777777777777777777777777777777777
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            77777777777777777777dddddddddddddddddddddddd77777777777777777777
-            77777777777777777777dddddddddddddddddddddddd77777777777777777777
-            77777777777777777777dddddddddddddddddddddddd77777777777777777777
-            77777777777777777777dddddddddddddddddddddddd77777777777777777777
-            77777777777777777777dddddddddddddddddddddddd77777777777777777777
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            9999999999999999999999999999999999999999999999999999999999999999
-            9999999999999999999999999999999999999999999999999999999999999999
-            9999999999999999999999999999999999999999999999999999999999999999
-            9999999999999999999999999999999999999999999999999999999999999999
-            9999999999999999999999999999999999999999999999999999999999999999
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            8888888888888888888888888888888888888888888888888888888888888888
-            8888888888888888888888888888888888888888888888888888888888888888
-            8888888888888888888888888888888888888888888888888888888888888888
-            8888888888888888888888888888888888888888888888888888888888888888
-            8888888888888888888888888888888888888888888888888888888888888888
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ..............fffffffffffffffeeeeefffffffffffffff...............
-            ..............fffffffffffffffeeeeefffffffffffffff...............
-            ..............fffffffffffffffeeeeefffffffffffffff...............
-            ..............fffffffffffffffeeeeefffffffffffffff...............
-            ..............fffffffffffffffeeeeefffffffffffffff...............
-            ..............fffffffffffffffffffffffffffffffffff...............
-            ..............fffffffffffffffffffffffffffffffffff...............
-            ..............fffffffffffffffffffffffffffffffffff...............
-            ..............fffffffffffffffffffffffffffffffffff...............
-            ..............fffffffffffffffffffffffffffffffffff...............
-            ...................fffff...............fffff....................
-            ...................fffff...............fffff....................
-            ...................fffff...............fffff....................
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
+            ffffffffffffffffffffffffffffffff
             `, SpriteKind.Boss)
-        tiles.placeOnTile(Boss, tiles.getTileLocation(21, 12))
-        Boss.ay = 500
+        tiles.placeOnTile(Boss, tiles.getTileLocation(26, 11))
         statusbar = statusbars.create(10, 4, StatusBarKind.Health)
         statusbar.setPosition(13, 15)
         statusbar.setColor(7, 15)
@@ -969,7 +888,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite, otherSpr
         }
     }
 })
-let couteau: Sprite = null
 let statusbar: StatusBarSprite = null
 let grand_mur: Sprite = null
 let énemie_casqué: Sprite = null
@@ -981,7 +899,7 @@ let invincibilité = 0
 let héros: Sprite = null
 let progression = 0
 let limitescore = 9
-progression = 0
+progression = 10
 héros = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . f f f f f f f f . . . . 
@@ -1006,17 +924,6 @@ info.setLife(3)
 scene.cameraFollowSprite(héros)
 niveau_suivant()
 game.onUpdate(function () {
-    for (let Boss of sprites.allOfKind(SpriteKind.Boss)) {
-        if (Boss.isHittingTile(CollisionDirection.Left)) {
-            Boss.vx = randint(30, 50)
-        }
-        if (Boss.isHittingTile(CollisionDirection.Right)) {
-            Boss.vx = randint(-30, -50)
-        }
-        if (Boss.vx == 0) {
-            Boss.vx = randint(-30, -50)
-        }
-    }
     for (let enemie_normal2 of sprites.allOfKind(SpriteKind.Enemy)) {
         if (enemie_normal2.isHittingTile(CollisionDirection.Left)) {
             enemie_normal2.vx = randint(30, 50)
@@ -1046,68 +953,7 @@ game.onUpdate(function () {
     }
 })
 game.onUpdateInterval(1000, function () {
-    for (let valeur of sprites.allOfKind(SpriteKind.Boss)) {
-        couteau = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . f f . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . f . . . . . f f f f . . . 
-            . . . f f f f . . . . . f . . . 
-            . . . . . . . . f . . . . . . . 
-            . . . . . . . . f . . . . . . . 
-            . . . . . . . . f . . . . . . . 
-            . . . . . . . f f . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.shuriken)
-        animation.runImageAnimation(
-        couteau,
-        [img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . f f . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . 2 . . . . . . . . 
-            . . . . f . . d d 2 f f . . . . 
-            . . . . f f 2 d d . . f . . . . 
-            . . . . . . . . 2 . . . . . . . 
-            . . . . . . . . f . . . . . . . 
-            . . . . . . . f f . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . f . . . . . . . . . . 
-            . . . . . f . . . . f f . . . . 
-            . . . . . . 2 . . 2 . . . . . . 
-            . . . . . . . d d . . . . . . . 
-            . . . . . . . d d . . . . . . . 
-            . . . . . . 2 . . 2 . . . . . . 
-            . . . . f f . . . . f . . . . . 
-            . . . . . . . . . . f . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `],
-        100,
-        true
-        )
-        couteau.setPosition(Boss.x, Boss.y)
-        couteau.follow(héros, 20)
-    }
+	
 })
 forever(function () {
     pauseUntil(() => progression != 0)
@@ -1160,12 +1006,5 @@ forever(function () {
     }
 })
 forever(function () {
-    pauseUntil(() => progression == 10)
-    pause(10000)
-    while (true) {
-        for (let couteau of sprites.allOfKind(SpriteKind.shuriken)) {
-            sprites.destroy(couteau)
-            pause(1000)
-        }
-    }
+	
 })
