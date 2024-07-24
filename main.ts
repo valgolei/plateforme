@@ -34,8 +34,6 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
 statusbars.onZero(StatusBarKind.Health, function (status) {
     music.play(music.melodyPlayable(music.bigCrash), music.PlaybackMode.InBackground)
     sprites.destroy(Boss, effects.ashes, 2000)
-    pause(2000)
-    game.gameOver(true)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.énemie_invincible, function (sprite, otherSprite) {
     if (invincibilité == 0) {
@@ -677,7 +675,7 @@ function niveau_suivant () {
     if (progression == 10) {
         scene.setBackgroundColor(12)
         tiles.setCurrentTilemap(tilemap`BossEvolution`)
-        tiles.placeOnTile(héros, tiles.getTileLocation(0, 18))
+        tiles.placeOnTile(héros, tiles.getTileLocation(0, 17))
         héros.ay = 500
         music.stopAllSounds()
         game.showLongText("vous arrivez au boss", DialogLayout.Bottom)
@@ -731,13 +729,10 @@ function niveau_suivant () {
             ffffffffffffffffffffffffffffffff
             ffffffffffffffffffffffffffffffff
             `, SpriteKind.Boss)
-        tiles.placeOnTile(Boss, tiles.getTileLocation(26, 11))
+        tiles.placeOnTile(Boss, tiles.getTileLocation(15, 11))
         statusbar = statusbars.create(10, 4, StatusBarKind.Health)
         statusbar.setPosition(13, 15)
         statusbar.setColor(7, 15)
-        scene.cameraFollowSprite(Boss)
-        pause(1000)
-        scene.cameraFollowSprite(héros)
     }
     if (progression == 11) {
         scene.setBackgroundColor(13)
@@ -865,7 +860,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.shuriken, function (sprite, otherSprite) {
     if (invincibilité == 0) {
-        sprites.destroy(otherSprite)
         info.changeLifeBy(-1)
         music.play(music.melodyPlayable(music.buzzer), music.PlaybackMode.InBackground)
         touché()
@@ -874,20 +868,14 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.shuriken, function (sprite, othe
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite, otherSprite) {
     if (sprite.y < otherSprite.top) {
         héros.vy = -200
-        statusbar.value += -20
+        statusbar.value += -10
         music.play(music.melodyPlayable(music.smallCrash), music.PlaybackMode.InBackground)
         pause(200)
     } else {
-        if (invincibilité == 0) {
-            if (info.life() == 1) {
-                sprites.destroy(héros)
-            }
-            music.play(music.melodyPlayable(music.buzzer), music.PlaybackMode.InBackground)
-            info.changeLifeBy(-1)
-            touché()
-        }
+        héros.x += -10
     }
 })
+let couteau: Sprite = null
 let statusbar: StatusBarSprite = null
 let grand_mur: Sprite = null
 let énemie_casqué: Sprite = null
@@ -899,7 +887,7 @@ let invincibilité = 0
 let héros: Sprite = null
 let progression = 0
 let limitescore = 9
-progression = 10
+progression = 0
 héros = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . f f f f f f f f . . . . 
@@ -952,9 +940,6 @@ game.onUpdate(function () {
         info.changeLifeBy(1)
     }
 })
-game.onUpdateInterval(1000, function () {
-	
-})
 forever(function () {
     pauseUntil(() => progression != 0)
     if (progression > 10) {
@@ -1004,7 +989,289 @@ forever(function () {
         niveau_suivant()
         info.startCountdown(180)
     }
+    if (héros.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleBlueCrystal)) {
+        game.gameOver(true)
+    }
+    if (héros.tileKindAt(TileDirection.Center, sprites.dungeon.collectibleRedCrystal)) {
+        game.setGameOverMessage(true, "Congratulations")
+        game.setGameOverEffect(true, effects.confetti)
+        game.gameOver(true)
+    }
 })
 forever(function () {
-	
+    for (let valeur of sprites.allOfKind(SpriteKind.Boss)) {
+        for (let index = 0; index < 3; index++) {
+            couteau = sprites.create(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . f . . . . . f f f f . . . 
+                . . . f f f f . . . . . f . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, SpriteKind.shuriken)
+            animation.runImageAnimation(
+            couteau,
+            [img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . . . . . 2 . . . . . . . . 
+                . . . . f . . d d 2 f f . . . . 
+                . . . . f f 2 d d . . f . . . . 
+                . . . . . . . . 2 . . . . . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `,img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . f . . . . . . . . . . 
+                . . . . . f . . . . f f . . . . 
+                . . . . . . 2 . . 2 . . . . . . 
+                . . . . . . . d d . . . . . . . 
+                . . . . . . . d d . . . . . . . 
+                . . . . . . 2 . . 2 . . . . . . 
+                . . . . f f . . . . f . . . . . 
+                . . . . . . . . . . f . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `],
+            100,
+            true
+            )
+            couteau.setPosition(Boss.x - 24, Boss.y)
+            couteau.follow(héros, 32)
+            pause(2000)
+        }
+        for (let valeur of sprites.allOfKind(SpriteKind.shuriken)) {
+            sprites.destroy(valeur)
+            pause(2000)
+        }
+        for (let index = 0; index < 7; index++) {
+            couteau = sprites.create(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . f . . . . . f f f f . . . 
+                . . . f f f f . . . . . f . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, SpriteKind.shuriken)
+            animation.runImageAnimation(
+            couteau,
+            [img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . . . . . 2 . . . . . . . . 
+                . . . . f . . d d 2 f f . . . . 
+                . . . . f f 2 d d . . f . . . . 
+                . . . . . . . . 2 . . . . . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `,img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . f . . . . . . . . . . 
+                . . . . . f . . . . f f . . . . 
+                . . . . . . 2 . . 2 . . . . . . 
+                . . . . . . . d d . . . . . . . 
+                . . . . . . . d d . . . . . . . 
+                . . . . . . 2 . . 2 . . . . . . 
+                . . . . f f . . . . f . . . . . 
+                . . . . . . . . . . f . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `],
+            100,
+            true
+            )
+            couteau.setPosition(Boss.x - 20, Boss.y + 16)
+            couteau.vx = -100
+            couteau.setBounceOnWall(true)
+            pause(1000)
+        }
+        for (let valeur of sprites.allOfKind(SpriteKind.shuriken)) {
+            sprites.destroy(valeur)
+            pause(500)
+        }
+        for (let index = 0; index < 50; index++) {
+            couteau = sprites.create(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . f . . . . . f f f f . . . 
+                . . . f f f f . . . . . f . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, SpriteKind.shuriken)
+            animation.runImageAnimation(
+            couteau,
+            [img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . . . . . 2 . . . . . . . . 
+                . . . . f . . d d 2 f f . . . . 
+                . . . . f f 2 d d . . f . . . . 
+                . . . . . . . . 2 . . . . . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `,img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . f . . . . . . . . . . 
+                . . . . . f . . . . f f . . . . 
+                . . . . . . 2 . . 2 . . . . . . 
+                . . . . . . . d d . . . . . . . 
+                . . . . . . . d d . . . . . . . 
+                . . . . . . 2 . . 2 . . . . . . 
+                . . . . f f . . . . f . . . . . 
+                . . . . . . . . . . f . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `],
+            100,
+            true
+            )
+            couteau.setPosition(randint(10, 300), 5)
+            couteau.vy = 75
+            couteau.setFlag(SpriteFlag.DestroyOnWall, true)
+            pause(225)
+        }
+        pause(2000)
+        Boss.vx = -56
+        pause(600)
+        Boss.vx = 0
+        for (let index = 0; index < 5; index++) {
+            couteau = sprites.create(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . f . . . . . f f f f . . . 
+                . . . f f f f . . . . . f . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, SpriteKind.shuriken)
+            animation.runImageAnimation(
+            couteau,
+            [img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . f . . . . . . . . 
+                . . . . . . . 2 . . . . . . . . 
+                . . . . f . . d d 2 f f . . . . 
+                . . . . f f 2 d d . . f . . . . 
+                . . . . . . . . 2 . . . . . . . 
+                . . . . . . . . f . . . . . . . 
+                . . . . . . . f f . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `,img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . f . . . . . . . . . . 
+                . . . . . f . . . . f f . . . . 
+                . . . . . . 2 . . 2 . . . . . . 
+                . . . . . . . d d . . . . . . . 
+                . . . . . . . d d . . . . . . . 
+                . . . . . . 2 . . 2 . . . . . . 
+                . . . . f f . . . . f . . . . . 
+                . . . . . . . . . . f . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `],
+            100,
+            true
+            )
+            couteau.setPosition(Boss.x, Boss.y)
+            couteau.vx = randint(-50, 50)
+            couteau.vy = randint(-50, 50)
+            couteau.setFlag(SpriteFlag.DestroyOnWall, true)
+            pause(400)
+        }
+        pause(3000)
+        sprites.destroyAllSpritesOfKind(SpriteKind.shuriken)
+        Boss.vx = 56
+        pause(600)
+        Boss.vx = 0
+    }
 })
